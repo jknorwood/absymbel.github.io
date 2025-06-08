@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>jknorwood.pub: I Am Root</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: monospace;
+      padding: 2rem;
+    }
+    .terminal {
+      border: 2px solid #0f0;
+      padding: 1rem;
+      margin: auto;
+      max-width: 800px;
+      background: #111;
+    }
+    .blinking {
+      animation: blink 1s steps(2, start) infinite;
+    }
+    @keyframes blink {
+      to {
+        visibility: hidden;
+      }
+    }
+    a {
+      color: #0ff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <pre>
+&gt; jknorwood.pub
+&gt; Rooted since 198X
+&gt; All protocols served. No cookies required.
+&gt; <span style="color: #f00;">sudo</span> is for cowards.
+&gt;
+&gt; Public Key: <a href="https://github.com/jknorwood.keys" target="_blank">jknorwood.pub</a>
+&gt; Status: <span id="uptime">Fetching uptime...</span>
+
+<span class="blinking">█</span>
+    </pre>
+  </div>
+
+  <script>
+    fetch("https://worldtimeapi.org/api/timezone/America/Los_Angeles")
+      .then(res => res.json())
+      .then(data => {
+        const start = new Date("2024-01-01T00:00:00-08:00");
+        const now = new Date(data.datetime);
+        const uptime = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+        document.getElementById("uptime").innerText = uptime + " days online since Sandra said yes.";
+      });
+  </script>
+</body>
+</html>
